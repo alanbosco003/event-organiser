@@ -32,19 +32,10 @@ export function CreateEventTemplate({ onViewEvent }: Props) {
     scrollRef.current?.scrollTo({ y: 0, animated: true });
   }, [failureNonce]);
 
-  const clearForm = () => {
-    reset();
-    scrollRef.current?.scrollTo({ y: 0, animated: false });
-  };
-
   return (
     <View style={styles.canvas}>
       <View style={[styles.column, { paddingTop: insets.top }]}>
-        <ScreenHeader
-          title="Create event"
-          leftLabel={success ? undefined : "Cancel"}
-          onLeftPress={success ? undefined : clearForm}
-        />
+        <ScreenHeader title="Create event" />
         <KeyboardAvoidingView
           style={styles.flex}
           behavior={Platform.OS === "ios" ? "padding" : undefined}
