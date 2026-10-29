@@ -1,8 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Pressable, StyleSheet, View } from "react-native";
+import { Pressable, View } from "react-native";
 
+import { styles } from "../../styles/inviteChip";
 import { colors } from "../../theme/colors";
-import { radius } from "../../theme/spacing";
 import { AppText } from "../atoms/AppText";
 
 type Props = {
@@ -27,20 +27,3 @@ export function InviteChip({ email, onRemove }: Props) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  chip: {
-    minHeight: 40,
-    borderRadius: radius.sm,
-    backgroundColor: colors.chip,
-    paddingLeft: 12,
-    paddingRight: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  email: {
-    flex: 1,
-    fontSize: 15,
-  },
-});

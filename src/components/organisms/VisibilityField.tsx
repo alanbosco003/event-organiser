@@ -1,6 +1,7 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 
 import { useEventForm } from "../../context/EventFormContext";
+import { styles } from "../../styles/visibilityField";
 import { FieldError } from "../atoms/FieldError";
 import { FieldHeader } from "../molecules/FieldHeader";
 import { PrivacyOption } from "../molecules/PrivacyOption";
@@ -33,10 +34,3 @@ export function VisibilityField() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: "row",
-    gap: 10,
-  },
-});

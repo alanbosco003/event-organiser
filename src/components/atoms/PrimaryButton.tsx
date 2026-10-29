@@ -1,7 +1,7 @@
-import { ActivityIndicator, Pressable, StyleSheet, Text } from "react-native";
+import { ActivityIndicator, Pressable, Text } from "react-native";
 
+import { styles } from "../../styles/primaryButton";
 import { colors } from "../../theme/colors";
-import { radius } from "../../theme/spacing";
 
 type Props = {
   label: string;
@@ -37,27 +37,3 @@ export function PrimaryButton({
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  button: {
-    minHeight: 52,
-    borderRadius: radius.md,
-    backgroundColor: colors.primary,
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "row",
-    gap: 8,
-    paddingHorizontal: 16,
-  },
-  pressed: {
-    backgroundColor: colors.primaryPressed,
-  },
-  loading: {
-    opacity: 0.9,
-  },
-  label: {
-    color: colors.white,
-    fontSize: 17,
-    fontWeight: "600",
-  },
-});

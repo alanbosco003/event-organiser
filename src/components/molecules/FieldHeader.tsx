@@ -1,5 +1,4 @@
-import { StyleSheet } from "react-native";
-
+import { styles } from "../../styles/fieldHeader";
 import { AppText } from "../atoms/AppText";
 
 type Props = {
@@ -15,9 +14,3 @@ export function FieldHeader({ label, meta }: Props) {
     </AppText>
   );
 }
-
-const styles = StyleSheet.create({
-  header: {
-    marginBottom: 8,
-  },
-});

@@ -1,7 +1,7 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 
 import { useEventForm } from "../../context/EventFormContext";
-import { spacing } from "../../theme/spacing";
+import { styles } from "../../styles/eventForm";
 import { CommunitiesField } from "./CommunitiesField";
 import { CoverImageField } from "./CoverImageField";
 import { FullDescriptionField } from "./FullDescriptionField";
@@ -25,9 +25,3 @@ export function EventForm() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  form: {
-    gap: spacing.field,
-  },
-});

@@ -1,6 +1,6 @@
-import { Pressable, StyleSheet, View } from "react-native";
+import { Pressable, View } from "react-native";
 
-import { colors } from "../../theme/colors";
+import { styles } from "../../styles/savedContactRow";
 import { AppText } from "../atoms/AppText";
 
 type Props = {
@@ -36,22 +36,3 @@ export function SavedContactRow({ name, email, added, onAdd }: Props) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
-    paddingVertical: 8,
-  },
-  copy: {
-    flex: 1,
-    gap: 1,
-  },
-  add: {
-    color: colors.primary,
-  },
-  added: {
-    color: colors.added,
-  },
-});

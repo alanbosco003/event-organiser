@@ -1,7 +1,8 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 
 import { useEventForm } from "../../context/EventFormContext";
 import { SAVED_CONTACTS } from "../../data/savedContacts";
+import { styles } from "../../styles/invitesField";
 import { LIMITS } from "../../validation/limits";
 import { hasInvite } from "../../validation/email";
 import { FieldError } from "../atoms/FieldError";
@@ -82,25 +83,3 @@ export function InvitesField() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  composer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  input: {
-    flex: 1,
-  },
-  tip: {
-    marginTop: 8,
-  },
-  chips: {
-    marginTop: 12,
-    gap: 8,
-  },
-  savedTitle: {
-    marginTop: 16,
-    marginBottom: 4,
-  },
-});

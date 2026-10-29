@@ -1,5 +1,6 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 
+import { styles } from "../../styles/hintRow";
 import { AppText } from "../atoms/AppText";
 
 type Props = {
@@ -17,15 +18,3 @@ export function HintRow({ hint, count }: Props) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    gap: 12,
-    marginTop: 6,
-  },
-  hint: {
-    flex: 1,
-  },
-});

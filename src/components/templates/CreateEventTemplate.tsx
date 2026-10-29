@@ -3,15 +3,13 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  StyleSheet,
   View,
   type ScrollViewInstance,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useEventForm } from "../../context/EventFormContext";
-import { colors } from "../../theme/colors";
-import { spacing } from "../../theme/spacing";
+import { styles } from "../../styles/createEventTemplate";
 import { OutlineButton } from "../atoms/OutlineButton";
 import { PrimaryButton } from "../atoms/PrimaryButton";
 import { AlertBanner } from "../molecules/AlertBanner";
@@ -97,34 +95,3 @@ export function CreateEventTemplate({ onViewEvent }: Props) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  canvas: {
-    flex: 1,
-    backgroundColor: colors.canvas,
-    alignItems: "center",
-  },
-  column: {
-    flex: 1,
-    width: "100%",
-    maxWidth: 480,
-    backgroundColor: colors.background,
-    overflow: "hidden",
-  },
-  flex: {
-    flex: 1,
-    minHeight: 0,
-  },
-  content: {
-    paddingHorizontal: spacing.screen,
-    paddingTop: spacing.lg,
-    paddingBottom: 28,
-  },
-  footer: {
-    paddingHorizontal: spacing.screen,
-    paddingTop: 12,
-    gap: 10,
-    backgroundColor: colors.background,
-    zIndex: 2,
-  },
-});

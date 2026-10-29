@@ -1,7 +1,6 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 
-import { colors } from "../../theme/colors";
-import { radius } from "../../theme/spacing";
+import { styles } from "../../styles/alertBanner";
 import { attentionTitle, ATTENTION_BODY } from "../../utils/eventCopy";
 import { AppText } from "../atoms/AppText";
 
@@ -21,20 +20,3 @@ export function AlertBanner({ count }: Props) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  banner: {
-    backgroundColor: colors.dangerSoft,
-    borderRadius: radius.md,
-    paddingHorizontal: 12,
-    paddingVertical: 12,
-    marginBottom: 18,
-  },
-  title: {
-    color: colors.danger,
-    marginBottom: 2,
-  },
-  body: {
-    color: colors.danger,
-  },
-});

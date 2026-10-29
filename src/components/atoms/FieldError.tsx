@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 
+import { styles } from "../../styles/fieldError";
 import { colors } from "../../theme/colors";
 import { AppText } from "./AppText";
 
@@ -16,12 +17,3 @@ export function FieldError({ message }: Props) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    gap: 6,
-    marginTop: 6,
-  },
-});

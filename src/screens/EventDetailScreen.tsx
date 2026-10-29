@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import { Image, ScrollView, StyleSheet, View } from "react-native";
+import { Image, ScrollView, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { PrimaryButton } from "../components/atoms/PrimaryButton";
@@ -7,8 +7,7 @@ import { AppText } from "../components/atoms/AppText";
 import { ScreenHeader } from "../components/molecules/ScreenHeader";
 import { useEventForm } from "../context/EventFormContext";
 import { communityName } from "../data/communities";
-import { colors } from "../theme/colors";
-import { spacing } from "../theme/spacing";
+import { styles } from "../styles/eventDetailScreen";
 import { visibilityLabel } from "../utils/eventCopy";
 
 export function EventDetailScreen() {
@@ -84,50 +83,3 @@ export function EventDetailScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  canvas: {
-    flex: 1,
-    backgroundColor: colors.canvas,
-    alignItems: "center",
-  },
-  column: {
-    flex: 1,
-    width: "100%",
-    maxWidth: 480,
-    backgroundColor: colors.background,
-  },
-  content: {
-    padding: spacing.screen,
-    paddingBottom: 32,
-    gap: 6,
-  },
-  image: {
-    height: 180,
-    width: "100%",
-    borderRadius: 12,
-    backgroundColor: colors.preview,
-    marginBottom: 8,
-  },
-  title: {
-    fontSize: 24,
-    lineHeight: 30,
-    marginBottom: 4,
-  },
-  full: {
-    marginTop: 8,
-  },
-  section: {
-    marginTop: 18,
-  },
-  empty: {
-    flex: 1,
-    padding: spacing.screen,
-    justifyContent: "center",
-    gap: 16,
-  },
-  emptyCopy: {
-    textAlign: "center",
-    color: colors.textSecondary,
-  },
-});
