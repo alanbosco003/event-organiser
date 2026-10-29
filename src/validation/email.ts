@@ -1,6 +1,5 @@
+import { EMAIL_PATTERN } from "./constants/emailPattern";
 import { LIMITS } from "./limits";
-
-const EMAIL_PATTERN = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+$/;
 
 export function normalizeEmail(email: string): string {
   return email.trim().toLowerCase();
@@ -81,35 +80,45 @@ export function commitInviteDraft(
   const accepted = fresh.slice(0, room);
   const overflow = fresh.slice(accepted.length);
 
-  let error: string | null = null;
-  if (invalid.length > 0) {
-    error = `"${invalid[0]}" isn't a valid email address.`;
-  } else if (overflow.length > 0) {
-    error = "You can invite up to 20 people.";
-  }
-
   return {
     invites: [...existing, ...accepted],
     draft: [...overflow, ...invalid].join(", "),
-    error,
+    error: inviteDraftError(invalid, overflow),
   };
 }
 
 export function validateInvites(invites: string[]): string | undefined {
-  const emails = invites.map((email) => email.trim()).filter((email) => email.length > 0);
+  const emails = nonemptyEmails(invites);
 
   if (emails.length < LIMITS.invites.min) {
     return "Add at least one email address.";
   }
 
   if (emails.length > LIMITS.invites.max) {
-    return "You can invite up to 20 people.";
+    return inviteLimitMessage();
   }
 
   const invalid = emails.find((email) => !isValidEmail(email));
-  if (invalid) {
-    return `"${invalid}" isn't a valid email address.`;
-  }
+  if (invalid) return invalidEmailMessage(invalid);
 
   return undefined;
+}
+
+function nonemptyEmails(invites: string[]): string[] {
+  return invites.map((email) => email.trim()).filter((email) => email.length > 0);
+}
+
+function inviteDraftError(invalid: string[], overflow: string[]): string | null {
+  const firstInvalid = invalid[0];
+  if (firstInvalid) return invalidEmailMessage(firstInvalid);
+  if (overflow.length > 0) return inviteLimitMessage();
+  return null;
+}
+
+function invalidEmailMessage(email: string): string {
+  return `"${email}" isn't a valid email address.`;
+}
+
+function inviteLimitMessage(): string {
+  return `You can invite up to ${LIMITS.invites.max} people.`;
 }

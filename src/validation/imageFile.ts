@@ -1,18 +1,6 @@
-import type { ImageIssue } from "../types/event";
+import type { CoverImage, ImageIssue } from "../types/event";
+import { ALLOWED_EXT, ALLOWED_MIME } from "./constants/imageTypes";
 import { LIMITS } from "./limits";
-
-const ALLOWED_MIME = new Set([
-  "image/jpeg",
-  "image/jpg",
-  "image/pjpeg",
-  "image/png",
-  "image/heic",
-  "image/heif",
-  "image/heic-sequence",
-  "image/heif-sequence",
-]);
-
-const ALLOWED_EXT = new Set(["jpg", "jpeg", "png", "heic", "heif"]);
 
 export type ImageAssessment =
   | { ok: true }
@@ -46,19 +34,30 @@ export function assessImageFile(file: {
   return { ok: true };
 }
 
+export function validateCoverImage(image: CoverImage | null): string | undefined {
+  if (!image) return "Add a cover image.";
+
+  const assessed = assessImageFile(image);
+  if (assessed.ok) return undefined;
+  return imageProblemMessage(image.name, assessed.reason);
+}
+
 export function imageProblemMessage(fileName: string, reason: "type" | "size"): string {
-  if (reason === "size") {
-    return `"${fileName}" is over 10 MB. Choose a smaller JPG, PNG or HEIC file.`;
+  switch (reason) {
+    case "size":
+      return `"${fileName}" is over 10 MB. Choose a smaller JPG, PNG or HEIC file.`;
+    case "type":
+      return `"${fileName}" isn't an image. Choose a JPG, PNG or HEIC file.`;
   }
-  return `"${fileName}" isn't an image. Choose a JPG, PNG or HEIC file.`;
 }
 
 export function imageIssueMessage(issue: ImageIssue): string {
-  if (issue.kind === "permission") {
-    return "We couldn't open your photos. Allow photo access in Settings, then try again.";
+  switch (issue.kind) {
+    case "permission":
+      return "We couldn't open your photos. Allow photo access in Settings, then try again.";
+    case "too-large":
+      return imageProblemMessage(issue.fileName, "size");
+    case "invalid-type":
+      return imageProblemMessage(issue.fileName, "type");
   }
-  if (issue.kind === "too-large") {
-    return imageProblemMessage(issue.fileName, "size");
-  }
-  return imageProblemMessage(issue.fileName, "type");
 }
