@@ -11,6 +11,7 @@ export function useEventSubmit(
   commitPendingInvites: () => PendingInviteCommit,
 ) {
   const submit = async () => {
+    // A second press during the creating state must not start another submit.
     if (state.status === "submitting") return;
 
     Keyboard.dismiss();
@@ -19,6 +20,7 @@ export function useEventSubmit(
 
     state.setSubmitAttempted(true);
     const result = validateEventForm(nextValues);
+    // A rejected photo is not a cover. Keep that failure even if the rest of the form is valid.
     const blockedByImage = !nextValues.image && state.imageIssue !== null;
 
     if (!result.ok || draftError || blockedByImage) {
@@ -28,6 +30,7 @@ export function useEventSubmit(
 
     state.setStatus("submitting");
     await delay(SUBMIT_DELAY_MS);
+    // Reset bumps the id, so a submit that was already waiting does not save over a cleared form.
     if (state.submissionId.current !== id) return;
 
     state.setPayload(result.payload);

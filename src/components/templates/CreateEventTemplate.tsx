@@ -30,6 +30,7 @@ export function CreateEventTemplate({ onViewEvent }: Props) {
   const submitting = status === "submitting";
 
   useEffect(() => {
+    // A new nonce on every failed submit scrolls to the banner even when the error count is unchanged.
     if (failureNonce === 0) return;
     scrollRef.current?.scrollTo({ y: 0, animated: true });
   }, [failureNonce]);
@@ -44,6 +45,7 @@ export function CreateEventTemplate({ onViewEvent }: Props) {
         >
           <ScrollView
             ref={scrollRef}
+            // Remount when the screen changes so the creating state starts at the top.
             key={status}
             style={styles.flex}
             keyboardShouldPersistTaps="handled"

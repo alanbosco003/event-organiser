@@ -15,6 +15,7 @@ export function useCoverImage(state: EventFormState) {
     }
 
     if (result.type === "rejected") {
+      // Leave the previous cover in place. The issue is what the field shows.
       state.setImageIssue(result.issue);
       return;
     }

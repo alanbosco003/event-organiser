@@ -31,6 +31,7 @@ function toPayload(values: EventFormValues): EventPayload {
     throw new Error("Cannot build a payload from an invalid form.");
   }
 
+  // Trim only for the saved event. The fields still show the text the user typed.
   const payload: EventPayload = {
     image: values.image,
     title: values.title.trim(),
@@ -39,6 +40,8 @@ function toPayload(values: EventFormValues): EventPayload {
     privacy: values.privacy,
   };
 
+  // Each mode stores only its own list. An empty communities array means everyone.
+  // The other list stays in form state so switching privacy can restore it.
   if (values.privacy === "public") {
     payload.communities = [...values.communityIds];
   } else {

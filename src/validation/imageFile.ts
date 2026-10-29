@@ -17,6 +17,7 @@ export function isAllowedImage(file: { name: string; mimeType: string }): boolea
   const mime = file.mimeType.toLowerCase().split(";")[0]?.trim() ?? "";
   const ext = extensionOf(file.name);
 
+  // A present MIME type or extension must be allowed. A file with neither is rejected.
   if (mime && !ALLOWED_MIME.has(mime)) return false;
   if (ext && !ALLOWED_EXT.has(ext)) return false;
   if (!mime && !ext) return false;
@@ -30,6 +31,7 @@ export function assessImageFile(file: {
   size: number;
 }): ImageAssessment {
   if (!isAllowedImage(file)) return { ok: false, reason: "type" };
+  // Size 0 is unknown, not oversized, so it does not fail this check.
   if (file.size > LIMITS.imageBytes) return { ok: false, reason: "size" };
   return { ok: true };
 }

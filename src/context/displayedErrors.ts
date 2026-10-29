@@ -10,7 +10,11 @@ type DisplayedErrorInput = {
   submitAttempted: boolean;
 };
 
-/** Decide which messages the form should show right now. */
+/**
+ * Decide which messages the form should show right now.
+ * Photo, file, invite, and non-English problems show as soon as they happen.
+ * Required and length problems wait until Create event has been pressed.
+ */
 export function displayedErrors({
   validationErrors,
   values,

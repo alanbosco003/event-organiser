@@ -43,6 +43,7 @@ export async function pickCoverImage(): Promise<PickCoverResult> {
       image: { uri: asset.uri, name, size, mimeType },
     };
   } catch (error) {
+    // Some rejected types throw. Any other failure is treated as photo access being denied.
     const message = error instanceof Error ? error.message : "";
     if (message.toLowerCase().includes("unsupported file type")) {
       return {
@@ -88,6 +89,7 @@ function mimeFromName(name: string): string {
 }
 
 function resolveSize(uri: string, reported?: number | null): number {
+  // 0 means the platform did not report a size. The size rule then skips the file.
   if (typeof reported === "number" && reported > 0) return reported;
   try {
     const size = new File(uri).size;

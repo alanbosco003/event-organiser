@@ -12,6 +12,7 @@ export function useFormErrors(state: EventFormState) {
     submitAttempted: state.submitAttempted,
   });
 
+  // The summary banner counts only after Create event. Immediate field errors do not raise it.
   const attentionCount = state.submitAttempted
     ? Object.values(errors).filter(Boolean).length
     : 0;

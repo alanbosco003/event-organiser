@@ -62,6 +62,7 @@ export function commitInviteDraft(
 
   const invalid: string[] = [];
   const fresh: string[] = [];
+  // Match duplicates without regard to case, including addresses already added.
   const seen = new Set(existing.map(normalizeEmail));
 
   for (const token of tokens) {
@@ -76,6 +77,7 @@ export function commitInviteDraft(
     fresh.push(token.trim());
   }
 
+  // Keep the overflow in the draft so a paste that is too long is not silently dropped.
   const room = Math.max(LIMITS.invites.max - existing.length, 0);
   const accepted = fresh.slice(0, room);
   const overflow = fresh.slice(accepted.length);
