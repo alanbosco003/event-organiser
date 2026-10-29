@@ -23,12 +23,12 @@ export function ShortDescriptionField() {
         minHeight={88}
         error={Boolean(errors.shortDescription)}
         accessibilityLabel="Short description, required"
-        accessibilityHint="English letters, numbers, and basic punctuation only. 10 to 150 characters."
+        accessibilityHint="Only English allowed. Letters, numbers, and basic punctuation. 10 to 150 characters."
         testID="field-short-description"
         autoCapitalize="sentences"
       />
       <HintRow
-        hint="English only · 10–150 characters"
+        hint="Only English allowed · 10–150 characters"
         count={`${values.shortDescription.length} / ${max}`}
       />
       {errors.shortDescription ? <FieldError message={errors.shortDescription} /> : null}
