@@ -48,8 +48,12 @@ src/
     molecules/          label, hint, banner, privacy card, rows
     organisms/          one form section each, plus the form and success state
     templates/          header, scrolling body, footer
-  context/              form state and actions
-  validation/           image, title, descriptions, email, and payload rules
+  state/                form values, image issue, invites, and submit status
+  hooks/                field, cover image, invite, error, and submit actions
+  context/              provider that combines the state and hooks
+  styles/               StyleSheet for every screen and component
+  validation/           field switch and checkers
+    constants/          punctuation, image types, email pattern, text limits
   services/             photo library picker
   data/                 mock communities and saved contacts
   types/                form values, privacy, and payload
@@ -59,7 +63,7 @@ src/
 
 ## Validation
 
-Text is trimmed before it is checked and before it is put in the payload. The character counter shows what is typed, including spaces.
+Every field goes through `validateField`. That switch calls the matching checker. Title, short description, and full description share one trim-and-length check. The short description adds an English-character check before the length check. Text is trimmed again when it is copied into the payload. The character counter shows what is typed, including spaces.
 
 | Field | Rules |
 | --- | --- |
@@ -71,7 +75,7 @@ Text is trimmed before it is checked and before it is put in the payload. The ch
 | Communities | Public only. Optional. An empty list means the event is visible to everyone. |
 | Invites | Private only. At least 1 and at most 20 valid emails. No empty rows. |
 
-Field errors appear after **Create event**, then update as the value changes. Photo permission, file type, file size, and invite format errors appear as soon as they happen.
+Field errors appear after **Create event**, then update as the value changes. Photo permission, file type, file size, invite format, and non-English characters in the short description appear as soon as they happen.
 
 Short description punctuation includes `. , ! ? ' " - – — : ; ( ) / & @ # % + =` and newlines. Letters outside basic English, such as `ü`, are rejected with the character named in the error.
 
@@ -101,7 +105,7 @@ type EventPayload = {
 };
 ```
 
-**Create event** validates the whole form. Invalid input shows a summary and field errors, and does not show success. Valid input shows **Creating...** for a short moment, then **Event created**. Nothing is sent to a server. **View event** shows the payload saved in context. **Cancel** and **Create another** clear the form.
+**Create event** validates the whole form. Invalid input shows a summary and field errors, and does not show success. Valid input shows **Creating...** for a short moment, then **Event created**. Nothing is sent to a server. **View event** shows the payload saved in context. **Create another** clears the form.
 
 ## Known gaps
 
