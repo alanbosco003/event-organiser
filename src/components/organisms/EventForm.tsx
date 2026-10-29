@@ -20,6 +20,7 @@ export function EventForm() {
       <ShortDescriptionField />
       <FullDescriptionField />
       <VisibilityField />
+      {/* Hide the other section. Its draft stays in state until the form is cleared. */}
       {values.privacy === "public" ? <CommunitiesField /> : null}
       {values.privacy === "private" ? <InvitesField /> : null}
     </View>

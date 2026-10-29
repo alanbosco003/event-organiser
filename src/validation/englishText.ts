@@ -7,6 +7,7 @@ export function isAllowedEnglishChar(char: string): boolean {
   return PUNCTUATION.has(char);
 }
 
+/** Each disallowed character once, in the order it first appears. */
 export function disallowedEnglishCharacters(value: string): string[] {
   const seen = new Set<string>();
   const found: string[] = [];

@@ -6,6 +6,7 @@ export function validateTitle(value: string): string | undefined {
   return validateBoundedText(value, titleBounds);
 }
 
+/** Character errors are reported before the length errors. */
 export function validateShortDescription(value: string): string | undefined {
   return validateBoundedText(value, shortBounds, englishCharacterError);
 }

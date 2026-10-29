@@ -10,6 +10,7 @@ import type { EventFormContextValue } from "./types";
 
 const EventFormContext = createContext<EventFormContextValue | null>(null);
 
+/** Wires state to actions. Screens only read the value this provider publishes. */
 export function EventFormProvider({ children }: { children: ReactNode }) {
   const state = useEventFormState();
   const fields = useFormFields(state);

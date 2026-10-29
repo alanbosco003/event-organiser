@@ -14,6 +14,7 @@ export function useFormFields(state: EventFormState) {
     state.patchValues({ fullDescription });
   };
 
+  // Communities and invites stay put, so switching back restores the other draft.
   const setPrivacy = (privacy: Privacy) => {
     state.patchValues({ privacy });
   };

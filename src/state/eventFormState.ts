@@ -19,6 +19,7 @@ export function useEventFormState() {
   const [payload, setPayload] = useState<EventPayload | null>(null);
   const [submitAttempted, setSubmitAttempted] = useState(false);
   const [failureNonce, setFailureNonce] = useState(0);
+  // Bumped when a submit starts and when the form is cleared, so a late submit can see it was cancelled.
   const submissionId = useRef(0);
 
   const patchValues = (patch: Partial<EventFormValues>) => {
