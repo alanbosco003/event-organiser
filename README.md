@@ -1,4 +1,4 @@
-# Create Event
+# Event organiser
 
 A small Expo app for creating an event. The form collects a cover image, title, short description, full description, and a public or private audience.
 
@@ -26,40 +26,40 @@ npm test
 npm run typecheck
 ```
 
-## Stack
+## Tech stack
 
-- TypeScript
-- Expo SDK 58 (React Native)
-- Expo Router for the create screen and the event summary
-- React Context for form state and actions
-- No form library. Validation is a set of pure functions the context calls
-- `expo-image-picker` for the cover image
+<a href="docs/tech-stack.md"><img alt="Click here to know more about the tech stack" src="https://img.shields.io/badge/Click%20here-to%20know%20more%20about%20the%20tech%20stack-1D4ED8?style=for-the-badge" /></a>
 
-## Folder structure
+The [tech stack page](docs/tech-stack.md) covers the libraries, the folder layout, and how the Context API holds the form.
 
-Atomic design. Routes stay thin. Rules do not import React.
+## Branches and versions
 
-```
-src/
-  app/                  screens registered with Expo Router
-  screens/              route containers
-  components/
-    atoms/              text, buttons, text input, field error
-    molecules/          label, hint, banner, privacy card, rows
-    organisms/          one form section each, plus the form and success state
-    templates/          header, scrolling body, footer
-  state/                form values, image issue, invites, and submit status
-  hooks/                field, cover image, invite, error, and submit actions
-  context/              provider that combines the state and hooks
-  styles/               StyleSheet for every screen and component
-  validation/           field switch and checkers
-    constants/          punctuation, image types, email pattern, text limits
-  services/             photo library picker
-  data/                 mock communities and saved contacts
-  types/                form values, privacy, and payload
-  theme/                colors and spacing
-  utils/                file size and success copy
-```
+Two long-lived branches:
+
+| Branch | Role |
+| --- | --- |
+| `main` | Released code only. Every release on `main` has a version tag. |
+| `dev` | Integration branch. New work is merged here before a release. |
+
+A change starts from `dev` on a short-lived branch, then merges back into `dev`. A release merges `dev` into `main` and tags that commit. Feature work does not land on `main` directly.
+
+Versions follow [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
+
+- `MAJOR` when a saved event shape or a required flow breaks.
+- `MINOR` when behavior is added and the previous release still fits.
+- `PATCH` when a bug is fixed and nothing new is added.
+
+`package.json` and `app.json` both store that number. The git tag is the same number with a `v` prefix, so version `1.0.0` is the tag `v1.0.0`. Tags are created on `main` only.
+
+The first release is `v1.0.0`. `main` and `dev` both start at that tag. Later work moves `dev` ahead, and the next tag is cut from `main` after `dev` is merged in.
+
+To cut the next release:
+
+1. Merge the finished work into `dev`.
+2. Bump `version` in `package.json` and `app.json`.
+3. Merge `dev` into `main`.
+4. Tag `main` as `vMAJOR.MINOR.PATCH`.
+5. Push `main`, `dev`, and the tag.
 
 ## Validation
 
@@ -105,7 +105,7 @@ type EventPayload = {
 };
 ```
 
-**Create event** validates the whole form. Invalid input shows a summary and field errors, and does not show success. Valid input shows **Creating...** for a short moment, then **Event created**. Nothing is sent to a server. **View event** shows the payload saved in context. **Create another** clears the form.
+**Create event** validates the whole form. Invalid input shows a summary and field errors, and does not show success. Valid input shows a short **Creating your event** loader, then **Event created**. Nothing is sent to a server. **View event** shows the payload saved in context. **Create another** clears the form.
 
 ## Known gaps
 

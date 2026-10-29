@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Create Event",
-    "slug": "create-event",
-    "scheme": "create-event",
+    "name": "Event organiser",
+    "slug": "event-organiser",
+    "scheme": "event-organiser",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,7 +27,7 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "Create Event needs access to your photos so you can add a cover image.",
+          "photosPermission": "Event organiser needs access to your photos so you can add a cover image.",
           "microphonePermission": false
         }
       ]

@@ -4,7 +4,7 @@ import type { EventFormState } from "../state/eventFormState";
 import { validateEventForm } from "../validation/eventForm";
 import type { PendingInviteCommit } from "./useInvites";
 
-const SUBMIT_DELAY_MS = 700;
+const SUBMIT_DELAY_MS = 1100;
 
 export function useEventSubmit(
   state: EventFormState,

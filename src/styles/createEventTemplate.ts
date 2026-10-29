@@ -25,6 +25,9 @@ export const styles = StyleSheet.create({
     paddingTop: spacing.lg,
     paddingBottom: 28,
   },
+  submitting: {
+    flexGrow: 1,
+  },
   footer: {
     paddingHorizontal: spacing.screen,
     paddingTop: 12,

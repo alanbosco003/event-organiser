@@ -15,6 +15,7 @@ import { PrimaryButton } from "../atoms/PrimaryButton";
 import { AlertBanner } from "../molecules/AlertBanner";
 import { ScreenHeader } from "../molecules/ScreenHeader";
 import { EventForm } from "../organisms/EventForm";
+import { SubmittingState } from "../organisms/SubmittingState";
 import { SuccessState } from "../organisms/SuccessState";
 
 type Props = {
@@ -26,6 +27,7 @@ export function CreateEventTemplate({ onViewEvent }: Props) {
   const { status, attentionCount, failureNonce, submit, reset } = useEventForm();
   const scrollRef = useRef<ScrollViewInstance>(null);
   const success = status === "success";
+  const submitting = status === "submitting";
 
   useEffect(() => {
     if (failureNonce === 0) return;
@@ -42,13 +44,15 @@ export function CreateEventTemplate({ onViewEvent }: Props) {
         >
           <ScrollView
             ref={scrollRef}
-            key={success ? "success" : "form"}
+            key={status}
             style={styles.flex}
             keyboardShouldPersistTaps="handled"
-            contentContainerStyle={styles.content}
+            contentContainerStyle={[styles.content, submitting && styles.submitting]}
           >
             {success ? (
               <SuccessState />
+            ) : submitting ? (
+              <SubmittingState />
             ) : (
               <>
                 {attentionCount > 0 ? <AlertBanner count={attentionCount} /> : null}
